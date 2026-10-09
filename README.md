@@ -1,135 +1,152 @@
-# ابزار نقاشی ساده با React
+> Persian version: [README.fa.md](README.fa.md)
 
-## مقدمه
+# Simple drawing tool with React
 
-این پروژه یک ابزار نقاشی تعاملی است که با استفاده از React.js و JavaScript ES6+ توسعه یافته است. هدف از این پروژه، ایجاد یک رابط کاربری کامل برای ترسیم اشکال مختلف با قابلیت‌های پیشرفته مانند Drag and Drop، Undo/Redo، انتخاب رنگ و تنظیم اندازه است.
+## Introduction
 
-## ویژگی‌های پیاده‌سازی شده
+This project is an interactive drawing tool built with React.js and modern JavaScript (ES6+). Its goal is a complete user interface for drawing shapes, with drag and drop, undo/redo, color selection and size adjustment.
 
-### رابط کاربری اصلی
-برنامه شامل چهار بخش اصلی است:
+## Implemented features
 
-1. **Header (هدر)**: شامل فیلد ورودی برای عنوان نقاشی، دکمه‌های Undo/Redo، Import و Export
-2. **Sidebar (نوار کناری)**: ابزارهای ترسیم، انتخاب رنگ و تنظیم اندازه
-3. **Canvas (بوم ترسیم)**: منطقه اصلی برای ترسیم و جابجایی اشکال
-4. **Footer (پایین صفحه)**: نمایش آمار تعداد هر نوع شکل
+### Main interface
 
-### ابزارهای ترسیم
-شش نوع شکل مختلف پیاده‌سازی شده است:
-- دایره (Circle): با استفاده از CSS border-radius
-- مربع (Square): با استفاده از CSS width و height
-- مثلث (Triangle): با استفاده از CSS border properties
-- ستاره (Star): با استفاده از SVG polygon
-- قلب (Heart): با استفاده از SVG path
-- لوزی (Diamond): با استفاده از SVG polygon
+The app has four main parts:
 
-### انتخاب رنگ
-سیستم انتخاب رنگ شامل 10 رنگ پیش‌فرض است:
-- قرمز (#e74c3c)
-- آبی (#3498db)
-- نارنجی (#f39c12)
-- سبز (#2ecc71)
-- بنفش (#9b59b6)
-- نارنجی تیره (#e67e22)
-- فیروزه‌ای (#1abc9c)
-- خاکستری تیره (#34495e)
-- زرد (#f1c40f)
-- صورتی (#e91e63)
+1. **Header**: an input field for the drawing title, the Undo/Redo buttons, and the Import and Export buttons
+2. **Sidebar**: drawing tools, color selection and size adjustment
+3. **Canvas**: the main area for drawing and moving shapes
+4. **Footer**: counts of each shape type
 
-### تنظیم اندازه
-اسلایدر برای تنظیم اندازه اشکال از 20 پیکسل تا 100 پیکسل پیاده‌سازی شده است. این قابلیت به کاربران امکان کنترل دقیق اندازه اشکال را می‌دهد.
+### Drawing tools
 
-### Drag and Drop
-سیستم جابجایی اشکال با استفاده از event handlers پیاده‌سازی شده است:
-- onMouseDown: شروع عملیات drag
-- onMouseMove: جابجایی شکل
-- onMouseUp: پایان عملیات drag
-- محاسبه offset برای جابجایی دقیق
+Six shape types are implemented:
+
+- Circle: CSS `border-radius`
+- Square: CSS `width` and `height`
+- Triangle: CSS border properties
+- Star: SVG `polygon`
+- Heart: SVG `path`
+- Diamond: SVG `polygon`
+
+### Color selection
+
+The color picker offers 10 preset colors:
+
+- Red (#e74c3c)
+- Blue (#3498db)
+- Orange (#f39c12)
+- Green (#2ecc71)
+- Purple (#9b59b6)
+- Dark orange (#e67e22)
+- Turquoise (#1abc9c)
+- Dark gray (#34495e)
+- Yellow (#f1c40f)
+- Pink (#e91e63)
+
+### Size adjustment
+
+A slider sets the shape size from 20 to 100 pixels, giving precise control over shape size.
+
+### Drag and drop
+
+Shapes are moved with mouse event handlers:
+
+- `onMouseDown`: starts the drag
+- `onMouseMove`: moves the shape
+- `onMouseUp`: ends the drag
+- an offset is computed so the shape moves precisely with the pointer
 
 ### Undo/Redo
-سیستم بازگشت و تکرار با استفاده از تاریخچه عملیات پیاده‌سازی شده است:
-- ذخیره تمام حالت‌های نقاشی در آرایه history
-- مدیریت index برای تعیین موقعیت فعلی
-- جلوگیری از اضافه شدن عملیات Undo/Redo به تاریخچه
+
+Undo and redo use an operation history:
+
+- every drawing state is saved in a `history` array
+- an index tracks the current position in the history
+- undo/redo operations themselves are not added to the history
 
 ### Import/Export
-سیستم ذخیره و بارگذاری با فرمت JSON:
-- Export: تبدیل داده‌ها به JSON و دانلود فایل
-- Import: خواندن فایل JSON و بازسازی نقاشی
-- مدیریت خطاها در هنگام بارگذاری
 
-## ساختار فایل‌ها
+Drawings are saved and loaded as JSON:
 
-### کامپوننت‌های اصلی
+- Export: converts the drawing to JSON and downloads the file
+- Import: reads a JSON file and rebuilds the drawing
+- loading errors are handled
 
-**App.jsx**: کامپوننت اصلی که تمام state management و logic را مدیریت می‌کند
-- مدیریت state برای اشکال، ابزار انتخاب شده، رنگ و اندازه
-- پیاده‌سازی Undo/Redo logic
-- مدیریت Import/Export operations
+## File structure
 
-**Header.jsx**: هدر برنامه شامل:
-- فیلد ورودی عنوان نقاشی
-- کامپوننت UndoRedo
-- دکمه‌های Import و Export
+### Main components
 
-**Sidebar.jsx**: نوار کناری شامل:
-- بخش ابزارهای ترسیم
-- کامپوننت ColorPicker
-- کامپوننت SizeSlider
+**App.jsx**: the main component, which holds all state management and logic:
+- state for the shapes, the selected tool, the color and the size
+- the undo/redo logic
+- import/export operations
 
-**Canvas.jsx**: بوم ترسیم شامل:
-- مدیریت Drag and Drop events
-- رندر کردن اشکال
-- محاسبه موقعیت دقیق
+**Header.jsx**: the app header, with:
+- the drawing title input
+- the `UndoRedo` component
+- the Import and Export buttons
 
-### کامپوننت‌های کمکی
+**Sidebar.jsx**: the sidebar, with:
+- the drawing tools section
+- the `ColorPicker` component
+- the `SizeSlider` component
 
-**ShapeButton.jsx**: دکمه‌های ابزار ترسیم
-- رندر SVG برای هر شکل
-- مدیریت حالت active/inactive
+**Canvas.jsx**: the drawing canvas, which:
+- handles drag-and-drop events
+- renders the shapes
+- computes exact positions
 
-**ColorPicker.jsx**: انتخاب رنگ
-- نمایش رنگ‌های موجود در grid
-- مدیریت انتخاب رنگ فعال
+### Helper components
 
-**SizeSlider.jsx**: تنظیم اندازه
-- اسلایدر HTML5 با custom styling
-- نمایش مقدار فعلی
+**ShapeButton.jsx**: drawing tool buttons
+- renders an SVG icon for each shape
+- handles the active/inactive state
 
-**UndoRedo.jsx**: دکمه‌های بازگشت و تکرار
-- مدیریت حالت disabled/enabled
-- نمایش آیکون‌های مناسب
+**ColorPicker.jsx**: color selection
+- shows the available colors in a grid
+- tracks the active color
 
-**Shape.jsx**: کامپوننت شکل
-- رندر اشکال مختلف با CSS و SVG
-- مدیریت استایل‌های پویا
-- پشتیبانی از Drag and Drop
+**SizeSlider.jsx**: size adjustment
+- an HTML5 slider with custom styling
+- shows the current value
 
-**Footer.jsx**: پایین صفحه
-- نمایش آمار اشکال
-- رندر کامپوننت‌های ShapeCount
+**UndoRedo.jsx**: undo and redo buttons
+- handles the enabled/disabled state
+- shows the matching icons
 
-**ShapeCount.jsx**: نمایش تعداد هر شکل
-- رندر آیکون و تعداد
-- پشتیبانی از تمام انواع اشکال
+**Shape.jsx**: the shape component
+- renders the different shapes with CSS and SVG
+- applies dynamic styles
+- supports drag and drop
 
-## تکنولوژی‌های استفاده شده
+**Footer.jsx**: the page footer
+- shows shape statistics
+- renders the `ShapeCount` components
 
-### Frontend
-- **React.js 18.2.0**: کتابخانه اصلی برای ساخت رابط کاربری
-- **JavaScript ES6+**: استفاده از arrow functions، destructuring، spread operator
-- **CSS3**: Flexbox، Grid، Transitions، Animations
-- **HTML5**: Semantic elements و modern APIs
+**ShapeCount.jsx**: the count for each shape
+- renders the icon and the count
+- supports every shape type
 
-### ویژگی‌های پیشرفته
-- **State Management**: استفاده از useState و useCallback برای بهینه‌سازی
-- **Event Handling**: مدیریت پیچیده mouse events برای Drag and Drop
-- **File API**: استفاده از FileReader برای Import/Export
-- **SVG**: رندر اشکال پیچیده مانند ستاره و قلب
+## Technologies
 
-## الگوریتم‌های پیاده‌سازی شده
+### Front end
 
-### Undo/Redo Algorithm
+- **React.js 18.2.0**: the UI library
+- **JavaScript ES6+**: arrow functions, destructuring, spread operator
+- **CSS3**: Flexbox, Grid, transitions, animations
+- **HTML5**: semantic elements and modern APIs
+
+### Implementation details
+
+- **State management**: `useState` and `useCallback` for efficient updates
+- **Event handling**: mouse event handling for drag and drop
+- **File API**: `FileReader` for import/export
+- **SVG**: rendering complex shapes such as the star and the heart
+
+## Algorithms
+
+### Undo/Redo
+
 ```javascript
 const addToHistory = useCallback((newShapes) => {
   if (!isUndoRedoAction.current) {
@@ -144,7 +161,8 @@ const addToHistory = useCallback((newShapes) => {
 }, [historyIndex]);
 ```
 
-### Drag and Drop Algorithm
+### Drag and drop
+
 ```javascript
 const handleShapeDragStart = (event, shapeId) => {
   const rect = canvasRef.current.getBoundingClientRect();
@@ -159,30 +177,34 @@ const handleShapeDragStart = (event, shapeId) => {
 };
 ```
 
-### Shape Rendering Algorithm
-هر شکل با الگوریتم خاص خود رندر می‌شود:
-- اشکال ساده (دایره، مربع): CSS properties
-- اشکال پیچیده (مثلث): CSS border trick
-- اشکال SVG (ستاره، قلب، لوزی): SVG elements
+### Shape rendering
 
-## فرمت داده‌ها
+Each shape is rendered in its own way:
 
-### ساختار Shape Object
+- simple shapes (circle, square): CSS properties
+- the triangle: the CSS border trick
+- SVG shapes (star, heart, diamond): SVG elements
+
+## Data format
+
+### Shape object
+
 ```javascript
 {
   type: "circle|square|triangle|star|heart|diamond",
-  x: number,        // موقعیت X
-  y: number,        // موقعیت Y
-  color: string,    // کد رنگ hex
-  size: number,     // اندازه به پیکسل
-  id: number        // شناسه یکتا
+  x: number,        // X position
+  y: number,        // Y position
+  color: string,    // hex color code
+  size: number,     // size in pixels
+  id: number        // unique id
 }
 ```
 
-### فرمت فایل JSON
+### JSON file format
+
 ```json
 {
-  "title": "عنوان نقاشی",
+  "title": "Drawing title",
   "shapes": [
     {
       "type": "circle",
@@ -196,92 +218,108 @@ const handleShapeDragStart = (event, shapeId) => {
 }
 ```
 
-## بهینه‌سازی‌های انجام شده
+## Optimizations
 
-### Performance Optimization
-- استفاده از useCallback برای جلوگیری از re-render غیرضروری
-- استفاده از useRef برای مدیریت drag state
-- بهینه‌سازی event handlers
+### Performance
 
-### Code Organization
-- جداسازی منطقی کامپوننت‌ها
-- استفاده از props برای data flow
-- مدیریت state در سطح مناسب
+- `useCallback` to avoid unnecessary re-renders
+- `useRef` to hold the drag state
+- lightweight event handlers
 
-### User Experience
-- انیمیشن‌های نرم برای تعامل
-- feedback بصری برای عملیات
-- مدیریت خطاها
+### Code organization
 
-## نحوه اجرا
+- components split by responsibility
+- data passed down through props
+- state kept at the appropriate level
 
-### پیش‌نیازها
-- Node.js نسخه 14 یا بالاتر
-- npm یا yarn
+### User experience
 
-### مراحل نصب
+- smooth animations for interactions
+- visual feedback for actions
+- error handling
+
+## Running the project
+
+### Prerequisites
+
+- Node.js 14 or newer
+- npm or yarn
+
+### Setup
+
 ```bash
-# کلون کردن پروژه
-git clone <repository-url>
-cd web-hw2
+# Clone the project
+git clone https://github.com/amirhosseinkho/web-hw2-canvas.git
+cd web-hw2-canvas
 
-# نصب وابستگی‌ها
+# Install dependencies
 npm install
 
-# اجرای برنامه
+# Start the app
 npm start
 ```
 
-برنامه در آدرس `http://localhost:3000` قابل دسترسی خواهد بود.
+The app runs at `http://localhost:3000`.
 
-## نحوه استفاده
+## Usage
 
-### ترسیم شکل
-1. انتخاب ابزار مورد نظر از نوار کناری
-2. تنظیم رنگ و اندازه دلخواه
-3. کلیک روی بوم در محل مورد نظر
+The interface labels are in Persian; English equivalents are given below.
 
-### جابجایی شکل
-- کلیک و نگه داشتن روی شکل
-- کشیدن به موقعیت جدید
-- رها کردن برای تثبیت موقعیت
+### Drawing a shape
 
-### حذف شکل
-- دوبار کلیک روی شکل مورد نظر
+1. Choose a tool in the sidebar.
+2. Set the color and size.
+3. Click on the canvas where the shape should go.
 
-### عملیات Undo/Redo
-- استفاده از دکمه‌های ↶ و ↷ در هدر
-- Undo: بازگشت به حالت قبلی
-- Redo: تکرار عملیات لغو شده
+### Moving a shape
 
-### ذخیره و بارگذاری
-- Export: کلیک روی "خروجی گرفتن" برای دانلود فایل JSON
-- Import: کلیک روی "وارد کردن" و انتخاب فایل JSON
+- Press and hold on the shape.
+- Drag it to the new position.
+- Release to place it.
 
-## مشکلات حل شده
+### Deleting a shape
 
-### Drag and Drop Challenges
-- محاسبه دقیق offset برای جابجایی طبیعی
-- مدیریت boundary canvas
-- جلوگیری از تداخل با click events
+- Double-click the shape.
 
-### Undo/Redo Implementation
-- مدیریت صحیح history stack
-- جلوگیری از اضافه شدن عملیات Undo/Redo به تاریخچه
-- بهینه‌سازی memory usage
+### Undo/Redo
 
-### Shape Rendering
-- پیاده‌سازی اشکال پیچیده با SVG
-- مدیریت responsive sizing
-- حفظ نسبت‌های صحیح
+- Use the ↶ and ↷ buttons in the header.
+- Undo returns to the previous state.
+- Redo repeats an undone operation.
 
-## نتیجه‌گیری
+### Saving and loading
 
-این پروژه موفق به پیاده‌سازی تمام قابلیت‌های درخواستی شده است:
-- Drag and Drop کامل و روان
-- سیستم Undo/Redo قابل اعتماد
-- انتخاب رنگ و اندازه انعطاف‌پذیر
-- ابزارهای ترسیم متنوع
-- Import/Export با فرمت استاندارد
+- Export: click "خروجی گرفتن" (Export) to download a JSON file.
+- Import: click "وارد کردن" (Import) and choose a JSON file.
 
-کد پروژه به صورت modular و قابل نگهداری نوشته شده و از بهترین practices در React استفاده می‌کند. 
+## Problems solved
+
+### Drag and drop
+
+- precise offset calculation so shapes move naturally
+- keeping shapes inside the canvas boundary
+- avoiding interference with click events
+
+### Undo/Redo
+
+- correct management of the history stack
+- keeping undo/redo operations out of the history
+- limiting memory use
+
+### Shape rendering
+
+- complex shapes implemented with SVG
+- responsive sizing
+- correct proportions
+
+## Conclusion
+
+The project implements all the requested features:
+
+- smooth drag and drop
+- reliable undo/redo
+- flexible color and size selection
+- a variety of drawing tools
+- import/export in a standard format (JSON)
+
+The code is modular and maintainable and follows common React practices.
